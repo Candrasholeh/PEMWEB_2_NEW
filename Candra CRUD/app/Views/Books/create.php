@@ -2,6 +2,12 @@
 <?= $this->section('content'); ?>
 
 <div class="container mt-4">
+        <?php if (session()->getFlashdata('error')) : ?>
+        <div class="alert alert-danger">
+            <?= session()->getFlashdata('error'); ?>
+        </div>
+    <?php endif; ?>
+
     <h2><?= $title; ?></h2>
 
     <form action="/books/save" method="post">

@@ -12,6 +12,12 @@
                 </div>
             <?php endif; ?>
 
+            <?php if (session()->getFlashdata('error')) : ?>
+                <div class="alert alert-danger">
+                    <?= session()->getFlashdata('error'); ?>
+                </div>
+            <?php endif; ?>
+
             <a href="/books/create" class="btn btn-primary mb-3">Tambah Data Buku</a>
 
             <table class="table table-bordered table-striped">
