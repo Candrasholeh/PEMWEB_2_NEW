@@ -25,11 +25,43 @@
     </div>
   </nav>
 
-
   <?= $this->rendersection('content'); ?>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
+
+  <script>
+    function previewImg() {
+      const sampul = document.querySelector('#sampul'); // Mengambil elemen input file dengan ID 'sampul'
+      const sampulLabel = document.querySelector('.custom-file-label'); // Mengambil elemen label untuk menampilkan nama file
+      const imgPreview = document.querySelector('.img-preview'); // Mengambil elemen <img> untuk menampilkan preview
+
+      // Memastikan ada file yang dipilih
+      if (sampul.files.length > 0) {
+        // Mengubah teks label menjadi nama file yang dipilih
+        sampulLabel.textContent = sampul.files[0].name;
+
+        // Membuat objek FileReader untuk membaca konten file
+        const fileSampul = new FileReader();
+        // Membaca file yang dipilih sebagai Data URL (base64 encoded string)
+        fileSampul.readAsDataURL(sampul.files[0]);
+
+        // Ketika FileReader selesai membaca file (onload event)
+        fileSampul.onload = function(e) {
+          // Mengatur atribut 'src' dari elemen imgPreview dengan hasil pembacaan file
+          imgPreview.src = e.target.result;
+        }
+      } else {
+        // Jika tidak ada file yang dipilih (misal, user membatalkan pilihan di dialog file)
+        // Kembalikan teks label ke default
+        sampulLabel.textContent = 'Pilih gambar...';
+        // Kembalikan gambar preview ke gambar default.jpg
+        imgPreview.src = '/img/default.jpg';
+      }
+    }
+  </script>
+
 </body>
 
 </html>
